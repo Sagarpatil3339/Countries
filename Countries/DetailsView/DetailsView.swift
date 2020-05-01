@@ -10,6 +10,24 @@ import UIKit
 
 class DetailsView: UIViewController {
 
+    @IBOutlet weak var flagImage: UIImageView!
+    
+    @IBOutlet weak var countryName: UILabel!
+    
+    @IBOutlet weak var capitol: UILabel!
+    
+    @IBOutlet weak var callingCode: UILabel!
+    
+    @IBOutlet weak var region: UILabel!
+    
+    @IBOutlet weak var subRegion: UILabel!
+    
+    @IBOutlet weak var timeZone: UILabel!
+    
+    @IBOutlet weak var currencies: UILabel!
+    
+    @IBOutlet weak var languages: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

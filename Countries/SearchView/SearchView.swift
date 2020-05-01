@@ -14,12 +14,16 @@ class SearchView: UIViewController, UISearchResultsUpdating {
     let searchController = UISearchController(searchResultsController: nil)
 
     func updateSearchResults(for searchController: UISearchController) {
-        viewModel.networkCall() { (refresh)  in
+        
+        if let searchString = searchController.searchBar.text
+        {
+        viewModel.networkCall(searchString: searchString) { (refresh)  in
             if refresh {
                 self.updateUI()
             } else {
                 AlertView.configureAlert(viewController: self)
             }
+        }
         }
     }
     
@@ -60,16 +64,6 @@ class SearchView: UIViewController, UISearchResultsUpdating {
             self.tableView.reloadData();
         }
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchViewTableViewCell", for: indexPath) as! SearchViewTableViewCell
-        return cell
-    }
 }
 
 // MARK: - Table Delegate protocal stubs
@@ -80,7 +74,6 @@ extension SearchView : UITableViewDelegate {
         let detailsViewController = DetailsView()
                 if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SearchViewTableViewCellIdentifier, for: indexPath) as? SearchViewTableViewCell {
         //                cell.item = item.highMagnitudeQuakes[indexPath.row]
-                        return cell
                     }
         navigationController?.pushViewController(detailsViewController, animated: true)
     }
