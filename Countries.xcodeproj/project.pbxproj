@@ -24,6 +24,7 @@
 		DF0C793C245A775300EB9C10 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0C793B245A775300EB9C10 /* DataService.swift */; };
 		DF0C793E245AC3EE00EB9C10 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0C793D245AC3EE00EB9C10 /* SceneDelegate.swift */; };
 		DFF1F479245AC96A00A67F17 /* SearchViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF1F478245AC96A00A67F17 /* SearchViewTableViewCell.swift */; };
+		DFF1F47B245C967000A67F17 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF1F47A245C967000A67F17 /* AlertView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		DF0C793B245A775300EB9C10 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		DF0C793D245AC3EE00EB9C10 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = Countries/SceneDelegate.swift; sourceTree = SOURCE_ROOT; };
 		DFF1F478245AC96A00A67F17 /* SearchViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewTableViewCell.swift; sourceTree = "<group>"; };
+		DFF1F47A245C967000A67F17 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +185,7 @@
 			children = (
 				DF0C7936245A768100EB9C10 /* CustomUIElement.swift */,
 				DF0C7938245A769700EB9C10 /* Constants.swift */,
+				DFF1F47A245C967000A67F17 /* AlertView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				DF0C7932245A759F00EB9C10 /* Model.swift in Sources */,
 				DF0C7934245A760F00EB9C10 /* CountriesSet.swift in Sources */,
 				DF0C7927245A746200EB9C10 /* SearchView.swift in Sources */,
+				DFF1F47B245C967000A67F17 /* AlertView.swift in Sources */,
 				DF0C793E245AC3EE00EB9C10 /* SceneDelegate.swift in Sources */,
 				DF0C78F7245A226800EB9C10 /* AppDelegate.swift in Sources */,
 				DF0C7939245A769700EB9C10 /* Constants.swift in Sources */,

@@ -55,7 +55,6 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="BYZ-38-t0r" id="Zpj-S4-AGl"/>
                             <outlet property="delegate" destination="BYZ-38-t0r" id="Ene-NK-FWw"/>
                         </connections>
                     </tableView>
@@ -66,7 +65,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1047.8260869565217" y="129.91071428571428"/>
+            <point key="canvasLocation" x="1087" y="130"/>
         </scene>
         <!--Details View-->
         <scene sceneID="EQQ-fE-gSk">
