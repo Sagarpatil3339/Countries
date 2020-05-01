@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchView: UIViewController, UITableViewDelegate, UISearchResultsUpdating {
+class SearchView: UIViewController, UISearchResultsUpdating {
     
     let viewModel = SearchViewModel(dataService: DataService())
     let searchController = UISearchController(searchResultsController: nil)
@@ -74,11 +74,12 @@ class SearchView: UIViewController, UITableViewDelegate, UISearchResultsUpdating
 
 // MARK: - Table Delegate protocal stubs
 
-extension EarthquakeTableView : UITableViewDelegate {
+extension SearchView : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailsViewController = DetailsView()
                 if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SearchViewTableViewCellIdentifier, for: indexPath) as? SearchViewTableViewCell {
+        //                cell.item = item.highMagnitudeQuakes[indexPath.row]
                         return cell
                     }
         navigationController?.pushViewController(detailsViewController, animated: true)

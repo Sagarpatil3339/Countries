@@ -70,6 +70,7 @@ extension SearchViewModel: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SearchViewTableViewCellIdentifier, for: indexPath) as? SearchViewTableViewCell {
+//                cell.item = item.highMagnitudeQuakes[indexPath.row]
                 return cell
             }
         return UITableViewCell()
