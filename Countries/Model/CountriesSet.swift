@@ -9,15 +9,14 @@
 import UIKit
 
 struct CountriesSet : Codable {
-    
     var name : String?
     var topLevelDomain : [String]?
-    var alpha2Code : Double?
+    var alpha2Code : String?
     var alpha3Code : String?
     var callingCodes : [String]?
     var capital : String?
     var altSpellings : [String]?
-    var region : Double?
+    var region : String?
     var subregion : String?
     var population : Int?
     var latlng : [Double]?
@@ -27,23 +26,13 @@ struct CountriesSet : Codable {
     var timezones : [String]?
     var borders : [String]?
     var nativeName : String?
-    var numericCode : Int
-    var currencies : [String : String]?
-    var languages : [String : String]?
-    var translations : [String : String]?
+    var numericCode : String?
+    var currencies : [[String : String?]]?
+    var languages : [[String : String?]]?
+    var translations : [String : String?]?
     var flag : String?
     var regionalBlocs : [RegionalBlocs]?
     var cioc : String?
-    
-//    enum CodingKeys: String, CodingKey {
-//        case datetime
-//        case depth
-//        case longitude = "lng"
-//        case src
-//        case eqid
-//        case magnitude
-//        case latitude = "lat"
-//    }
 }
 
 struct RegionalBlocs : Codable {

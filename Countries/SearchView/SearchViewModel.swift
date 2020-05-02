@@ -14,7 +14,7 @@ import UIKit
 class SearchViewModel: NSObject {
     // MARK: - Properties
     
-    var items = [CountriesSet]()
+    var items : [CountriesSet]?
     
     private var dataService: DataService?
     
@@ -58,12 +58,12 @@ class SearchViewModel: NSObject {
 
 extension SearchViewModel: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return items?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SearchViewTableViewCellIdentifier, for: indexPath) as? SearchViewTableViewCell {
-//                cell.item = item.highMagnitudeQuakes[indexPath.row]
+        if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SearchViewTableViewCellIdentifier, for: indexPath) as? SearchViewTableViewCell, let item = items?[indexPath.row] {
+            cell.setCell(item: item)
                 return cell
             }
         return UITableViewCell()

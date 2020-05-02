@@ -64,17 +64,13 @@ class SearchView: UIViewController, UISearchResultsUpdating {
             self.tableView.reloadData();
         }
     }
-}
-
-// MARK: - Table Delegate protocal stubs
-
-extension SearchView : UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailsViewController = DetailsView()
-                if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SearchViewTableViewCellIdentifier, for: indexPath) as? SearchViewTableViewCell {
-        //                cell.item = item.highMagnitudeQuakes[indexPath.row]
-                    }
-        navigationController?.pushViewController(detailsViewController, animated: true)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailViewID", let indexPath = tableView.indexPathForSelectedRow?.row {
+            let detailsViewController = segue.destination as! DetailsView
+            if let set = viewModel.items?[indexPath] {
+            detailsViewController.detailsViewModel = DetailsViewModel(set: set)
+            }
+        }
     }
 }

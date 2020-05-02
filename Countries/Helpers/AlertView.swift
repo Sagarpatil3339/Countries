@@ -13,7 +13,6 @@ import UIKit
  */
 
 class AlertView {
-    
  static func configureAlert(viewController: UIViewController) {
         let alert = UIAlertController(title: Constants.alertTitle, message: Constants.alertMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: Constants.ok, style: .default, handler: { action in
@@ -23,5 +22,4 @@ class AlertView {
             viewController.present(alert, animated: true, completion: nil)
         }
     }
-    
 }

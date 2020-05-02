@@ -11,19 +11,28 @@ import Foundation
 class DetailsViewModel : NSObject {
     
     // MARK: - Properties
+    var countryName : String = ""
+    var capital : String = ""
+    var callingCodes : String = ""
+    var region : String = ""
+    var subRegion : String = ""
+    var timeZones : String = ""
+    var currencies : String = ""
+    var languages : String = ""
     
-    var longitude : Double = 0.0
-    var latitude : Double = 0.0
-    var center : CLLocationCoordinate2D = CLLocationCoordinate2D()
-    
-    init(set: Earthquakes) {
+    init(set: CountriesSet) {
         super.init()
-        if let longitude = set.longitude, let latitude = set.latitude {
-            self.longitude = longitude
-            self.latitude = latitude
+        if let countryName = set.name, let capital = set.capital, let region = set.region, let subRegion = set.subregion, let callingCodesArray = set.callingCodes, let timezonesArray = set.timezones {
+            self.countryName = countryName
+            self.capital = capital
+            self.region = region
+            self.subRegion = subRegion
+            self.callingCodes = callingCodesArray.joined(separator: ", ")
+            self.timeZones = timezonesArray.joined(separator: ", ")
+            
+            
+            
         }
-        center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
-    
-    // MARK: - Methods
+
 }

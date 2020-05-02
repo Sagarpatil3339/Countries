@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import WebKit
+
 
 class SearchViewTableViewCell: UITableViewCell {    
+    @IBOutlet weak var flagImage: WKWebView!
     
     @IBOutlet weak var countryImage: UIImageView!
     
@@ -19,7 +22,29 @@ class SearchViewTableViewCell: UITableViewCell {
     }
     
     required init?(coder aDecoder: NSCoder) {
-            super.init(coder: aDecoder)
+        super.init(coder: aDecoder)
     }
     
+    
+    func setCell(item : CountriesSet){
+        countryName.text = item.name
+        
+        if let flag = item.flag {
+            DispatchQueue.global(qos: .background).async {
+                
+                let endPoint = URL(string: flag)
+                guard let endpointUrl = endPoint else {
+                    return;
+                }
+                let request = URLRequest(url: endpointUrl);
+                
+                DispatchQueue.main.async {
+                    self.flagImage.load(request)
+                }
+            }
+        }
+        
+        self.flagImage.scalesLargeContentImage = true
+        self.flagImage.contentMode = .center
+    }
 }
