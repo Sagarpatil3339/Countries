@@ -6,8 +6,8 @@ target 'Countries' do
 
   # Pods for Countries
 
-  pod 'SwiftSVG', '~> 2.0'
-  
+  pod 'SVGKit', :git => 'https://github.com/SVGKit/SVGKit.git', :branch => '3.x'
+
   
   target 'CountriesTests' do
     inherit! :search_paths

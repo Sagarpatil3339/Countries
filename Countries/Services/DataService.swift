@@ -7,9 +7,12 @@
 //
 
 import Foundation
-import UIKit
+import SVGKit
 
 /* Handling all the Network calls */
+
+    // Catche Object
+fileprivate let imageCache = NSCache<NSString, UIImage>()
 
 struct DataService {
     
@@ -60,6 +63,35 @@ struct DataService {
             return .success
         default:
             return .failure;
+        }
+    }
+    
+    // Network call for downloading images and storing in Catche
+    func downloadImage(url: String, completion: @escaping (_ image: UIImage?, _ error: Error? ) -> Void) {
+        // Remove this check when SVGKit bug is fixed.
+        let endPoint = url == "https://restcountries.eu/data/shn.svg" ? nil : URL(string: url )
+        guard let endpointUrl = endPoint else {
+            return;
+        }
+        if let cachedImage = imageCache.object(forKey: url as NSString) {
+            completion(cachedImage, nil)
+        } else {
+            var request = URLRequest(url: endpointUrl);
+            request.httpMethod = "GET";
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("application/json", forHTTPHeaderField: "Accept");
+            httpResponse(request: request, completionHandler: { (data, error) in
+                if let error = error {
+                    completion(nil, error)
+                }
+                if let receivedData = data {
+                    DispatchQueue.main.async {
+                        if let image = SVGKImage(data: receivedData).uiImage {
+                            imageCache.setObject(image, forKey: endpointUrl.absoluteString as NSString)
+                            completion(image, nil)
+                        }
+                    }
+                }});
         }
     }
 }

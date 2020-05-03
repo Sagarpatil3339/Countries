@@ -22,16 +22,23 @@ class DetailsViewModel : NSObject {
     
     init(set: CountriesSet) {
         super.init()
-        if let countryName = set.name, let capital = set.capital, let region = set.region, let subRegion = set.subregion, let callingCodesArray = set.callingCodes, let timezonesArray = set.timezones {
+        if let countryName = set.name, let capital = set.capital, let region = set.region, let subRegion = set.subregion, let callingCodesArray = set.callingCodes, let timezonesArray = set.timezones, let currenciesArray = set.currencies, let languagesArray = set.languages {
             self.countryName = countryName
             self.capital = capital
             self.region = region
             self.subRegion = subRegion
             self.callingCodes = callingCodesArray.joined(separator: ", ")
             self.timeZones = timezonesArray.joined(separator: ", ")
-            
-            
-            
+            for each in currenciesArray {
+                if let code = each["code"] as? String, let name = each["name"] as? String, let symbol = each["symbol"] as? String {
+                self.currencies = self.currencies + "Currency name: \(name), Currency Code: \(code), Currency Symbol: \(symbol) \n"
+                }
+            }
+            for each in languagesArray {
+                if let language = each["English"] as? String {
+                self.languages = self.languages + language + ", "
+                }
+            }
         }
     }
 
