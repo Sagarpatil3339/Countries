@@ -10,6 +10,10 @@ import UIKit
 
 class DetailsView: UIViewController {
 
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var insideView: UIView!
+    
     @IBOutlet weak var flagImage: UIImageView!
     
     @IBOutlet weak var countryName: UILabel!
@@ -32,13 +36,23 @@ class DetailsView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Details"
         setViews()
+        flagImage.layer.borderColor = UIColor.white.cgColor
+        flagImage.layer.borderWidth = 2
     }
     
     func setViews(){
         if let detailsViewModel = detailsViewModel {
             countryName.text = detailsViewModel.countryName
-            capitol.text = detailsViewModel.capital
+            capitol.text = "Capitol: \(detailsViewModel.capital)"
+            flagImage.image = detailsViewModel.flagImage
+            region.text = "Region: \(detailsViewModel.region)"
+            callingCode.text = "Calling Codes: \(detailsViewModel.callingCodes)"
+            timeZone.text = "Time Zones: \(detailsViewModel.timeZones)"
+            currencies.text = "Currencies:- \(detailsViewModel.currencies)"
+            languages.text = "Languages: \(detailsViewModel.languages)"
+            subRegion.text = "Subregion: \(detailsViewModel.subRegion)"
         }
     }
 }

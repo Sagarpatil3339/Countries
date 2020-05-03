@@ -52,6 +52,11 @@ class SearchViewModel: NSObject {
             completionHandler(true);
         }
     }
+    
+     func delayExecutionByMilliseconds(_ delay: Int, completionHandler: @escaping () -> Void) {
+        let when = DispatchTime.now() + .milliseconds(delay)
+        DispatchQueue.main.asyncAfter(deadline: when, execute: completionHandler)
+    }
 }
 
 // MARK: - Table datasource protocal stubs

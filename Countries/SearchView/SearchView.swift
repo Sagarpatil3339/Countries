@@ -60,8 +60,10 @@ class SearchView: UIViewController, UISearchResultsUpdating {
     }
     
     func updateUI() {
+        viewModel.delayExecutionByMilliseconds(500) {
         DispatchQueue.main.async {
-            self.tableView.reloadData();
+               self.tableView.reloadData();
+            }
         }
     }
     
