@@ -6,6 +6,8 @@
 //  Copyright © 2020 Prasad Patil. All rights reserved.
 //
 
+/* Structuring data for each instace of JSON Array with CODABLE Protocol*/
+
 import UIKit
 
 struct CountriesSet : Codable {

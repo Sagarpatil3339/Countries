@@ -7,37 +7,75 @@
 //
 
 import XCTest
+@testable import Countries
 
 class CountriesUITests: XCTestCase {
-
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // UI tests must launch the application that they test.
+    
+    // To test number of cells populated on the table in SearchView
+    func testNoOfCellsSearchview() {
+        var countOfCells = 0
         let app = XCUIApplication()
         app.launch()
-
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testLaunchPerformance() {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
-                XCUIApplication().launch()
-            }
+        app.searchFields.element.tap()
+        app.searchFields.element.typeText("India")
+        sleep(2)
+        app.tap()
+        for i in 0...app.tables.cells.count-1 {
+            app.tables.cells.element(boundBy: i).tap()
+            app.navigationBars.buttons["BACK"].tap()
+            countOfCells += 1
+        }
+        XCTAssertTrue(countOfCells == 2)
+        }
+    
+    // To test labels of cells populated on the table in SearchView
+    func testTableCellElementsSearchview() {
+        let app = XCUIApplication()
+        app.launch()
+        app.searchFields.element.tap()
+        app.searchFields.element.typeText("India")
+        sleep(2)
+        app.tap()
+        for _ in 0...app.tables.cells.count-1 {
+            let countryName = app.tables.cells.staticTexts["countryName"]
+            XCTAssertTrue(countryName.exists)
         }
     }
+
+    // To test labels of labels populated in the DetailsView
+    func testElementsDetailsview() {
+        let app = XCUIApplication()
+        app.launch()
+        app.searchFields.element.tap()
+        app.searchFields.element.typeText("India")
+        sleep(2)
+        app.tap()
+        for i in 0...app.tables.cells.count-1 {
+            app.tables.cells.element(boundBy: i).tap()
+            let countryNameLabel = app.staticTexts["countryNameLabel"]
+            let capitol = app.staticTexts["capitol"]
+            let region = app.staticTexts["region"]
+            let subRegion = app.staticTexts["subRegion"]
+            let callingCode = app.staticTexts["callingCode"]
+            let timeZone = app.staticTexts["timeZone"]
+            let currencies = app.staticTexts["currencies"]
+            let languages = app.staticTexts["languages"]
+
+            XCTAssertTrue(countryNameLabel.exists)
+            XCTAssertTrue(capitol.exists)
+            XCTAssertTrue(region.exists)
+            XCTAssertTrue(subRegion.exists)
+            XCTAssertTrue(callingCode.exists)
+            XCTAssertTrue(timeZone.exists)
+            XCTAssertTrue(currencies.exists)
+            XCTAssertTrue(languages.exists)
+            app.navigationBars.buttons["BACK"].tap()
+        }
+    }
+
+    
+    
 }

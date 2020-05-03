@@ -11,7 +11,7 @@ import SVGKit
 
 /* Handling all the Network calls */
 
-    // Catche Object
+// Catche Object
 fileprivate let imageCache = NSCache<NSString, UIImage>()
 
 struct DataService {

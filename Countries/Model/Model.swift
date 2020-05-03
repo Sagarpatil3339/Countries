@@ -15,8 +15,8 @@ class DataModel {
     
     init?(data: Data) {
         do {
-             countries = try JSONDecoder().decode([CountriesSet].self, from: data)
-            } catch {
+            countries = try JSONDecoder().decode([CountriesSet].self, from: data)
+        } catch {
             print("Error deserializing JSON: \(error)")
             return nil
         }

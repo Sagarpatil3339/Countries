@@ -26,7 +26,9 @@ class DetailsViewModel : NSObject {
         super.init()
         setProperties(set: set)
     }
-
+    
+    // MARK:- Methods
+    
     func setProperties(set: CountriesSet) {
         if let countryName = set.name, let capital = set.capital, let region = set.region, let subRegion = set.subregion, let callingCodesArray = set.callingCodes, let timezonesArray = set.timezones, let currenciesArray = set.currencies, let languagesArray = set.languages {
             self.countryName = countryName
@@ -38,29 +40,30 @@ class DetailsViewModel : NSObject {
             
             for each in currenciesArray {
                 if let code = each["code"] as? String, let name = each["name"] as? String, let symbol = each["symbol"] as? String {
-                self.currencies = self.currencies + "currency name: \(name) | currency Code: \(code) | currency Symbol: \(symbol) \n"
+                    self.currencies = self.currencies + "currency name: \(name) | currency Code: \(code) | currency Symbol: \(symbol) \n"
                 }
             }
             
             for each in languagesArray {
                 if let language = each["name"] as? String {
-                self.languages = self.languages + language + ", "
+                    self.languages = self.languages + language + ", "
                 }
             }
             
+            // Inorder to remove ", " from the end of the string after all the iterations
             self.languages.removeLast(2)
-            
+        }
+            // Service call for downloading the images via URL
             if let flagURL = set.flag {
                 DataService().downloadImage(url: flagURL, completion: { (image, error) in
                     if let error = error {
                         print("loading image error: \(error)")
                     } else {
                         if let image = image {
-                        self.flagImage = image
+                            self.flagImage = image
                         }
                     }
                 })
             }
         }
     }
-}

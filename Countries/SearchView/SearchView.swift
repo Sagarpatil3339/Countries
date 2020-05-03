@@ -10,40 +10,45 @@ import UIKit
 
 class SearchView: UIViewController, UISearchResultsUpdating {
     
+    // MARK:- Properties
+    
     let viewModel = SearchViewModel(dataService: DataService())
     let searchController = UISearchController(searchResultsController: nil)
-
+    
     func updateSearchResults(for searchController: UISearchController) {
         
         if let searchString = searchController.searchBar.text
         {
-        viewModel.networkCall(searchString: searchString) { (refresh)  in
-            if refresh {
-                self.updateUI()
-            } else {
-                AlertView.configureAlert(viewController: self)
+            viewModel.networkCall(searchString: searchString) { (refresh)  in
+                if refresh {
+                    self.updateUI()
+                } else {
+                    AlertView.configureAlert(viewController: self)
+                }
             }
-        }
         }
     }
     
     @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
-        tableView.dataSource = viewModel
         super.viewDidLoad()
+        tableView.dataSource = viewModel
+        searchController.accessibilityTraits = UIAccessibilityTraits.searchField
+        navigationItem.backBarButtonItem?.accessibilityIdentifier = "BACK"
         setTitles()
         setTable()
         setSearchBar()
     }
     
+    // MARK:- Methods
     
     func setTitles() {
         title = Constants.searchViewTitle
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: Constants.back, style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem?.accessibilityIdentifier = Constants.back
-
+        
     }
     
     func setTable() {
@@ -51,7 +56,7 @@ class SearchView: UIViewController, UISearchResultsUpdating {
         tableView.rowHeight = 100
         setTitles()
     }
-
+    
     func setSearchBar() {
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = false
@@ -61,17 +66,18 @@ class SearchView: UIViewController, UISearchResultsUpdating {
     
     func updateUI() {
         viewModel.delayExecutionByMilliseconds(500) {
-        DispatchQueue.main.async {
-               self.tableView.reloadData();
+            DispatchQueue.main.async {
+                self.tableView.reloadData();
             }
         }
     }
     
+    // Preparing segue in order to load data in the view model before navigating to the detail view screen
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detailViewID", let indexPath = tableView.indexPathForSelectedRow?.row {
             let detailsViewController = segue.destination as! DetailsView
             if let set = viewModel.items?[indexPath] {
-            detailsViewController.detailsViewModel = DetailsViewModel(set: set)
+                detailsViewController.detailsViewModel = DetailsViewModel(set: set)
             }
         }
     }

@@ -10,6 +10,8 @@ import UIKit
 
 class DetailsView: UIViewController {
 
+    // MARK:- Properties
+
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var insideView: UIView!
@@ -41,7 +43,9 @@ class DetailsView: UIViewController {
         flagImage.layer.borderColor = UIColor.white.cgColor
         flagImage.layer.borderWidth = 2
     }
-    
+
+    // MARK:- Methods
+
     func setViews(){
         if let detailsViewModel = detailsViewModel {
             countryName.text = detailsViewModel.countryName

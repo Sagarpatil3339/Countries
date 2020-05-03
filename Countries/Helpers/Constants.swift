@@ -20,4 +20,7 @@ class Constants {
     static let alertMessage : String = "Please turn on wifi/cellular services and restart the app"
     static let ok : String = "OK"
     static let back : String = "BACK"
+    
+    // Accessibility constants
+    static let countryName : String = "countryName"
 }

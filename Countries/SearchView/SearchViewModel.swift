@@ -22,9 +22,9 @@ class SearchViewModel: NSObject {
         super.init()
         self.dataService = dataService
     }
-
+    
     // MARK: - Methods
-
+    
     // Initial network call for fetching json and modeling
     
     func networkCall(searchString : String, completionHandler: @escaping (_ refresh : Bool) -> ()) {
@@ -37,7 +37,7 @@ class SearchViewModel: NSObject {
         let request = URLRequest(url: endpointUrl);
         
         self.dataService?.httpResponse(request: request) { (received_data, error) in
-
+            
             if let error = error {
                 print(error)
                 completionHandler(false)
@@ -53,7 +53,8 @@ class SearchViewModel: NSObject {
         }
     }
     
-     func delayExecutionByMilliseconds(_ delay: Int, completionHandler: @escaping () -> Void) {
+    // Introducing delay before refreshing the table views
+    func delayExecutionByMilliseconds(_ delay: Int, completionHandler: @escaping () -> Void) {
         let when = DispatchTime.now() + .milliseconds(delay)
         DispatchQueue.main.asyncAfter(deadline: when, execute: completionHandler)
     }
@@ -69,8 +70,8 @@ extension SearchViewModel: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.SearchViewTableViewCellIdentifier, for: indexPath) as? SearchViewTableViewCell, let item = items?[indexPath.row] {
             cell.setCell(item: item)
-                return cell
-            }
+            return cell
+        }
         return UITableViewCell()
     }
 }
