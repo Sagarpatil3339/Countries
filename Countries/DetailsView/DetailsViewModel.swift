@@ -40,7 +40,7 @@ class DetailsViewModel : NSObject {
             
             for each in currenciesArray {
                 if let code = each["code"] as? String, let name = each["name"] as? String, let symbol = each["symbol"] as? String {
-                    self.currencies = self.currencies + "currency name: \(name) | currency Code: \(code) | currency Symbol: \(symbol) \n"
+                    self.currencies = self.currencies + "| currency name: \(name) | currency Code: \(code) | currency Symbol: \(symbol) \n"
                 }
             }
             
